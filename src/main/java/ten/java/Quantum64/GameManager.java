@@ -16,9 +16,12 @@ public class GameManager {
 
 	public void setState(GameState state) {
 		this.currentState = GameState.WAITING_FOR_PLAYERS;
+		onStateChanged();
 	}
 
-	public void onStateChanger() {
+	public void onStateChanged() {
+		if (currentState == GameState.WAITING_FOR_PLAYERS) {
 
+		}
 	}
 }
