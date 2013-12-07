@@ -1,5 +1,18 @@
 package ten.java.Quantum64;
 
+import java.util.Iterator;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import ten.java.Quantum64.entity.EntityDragon;
+
 public class GameManager {
 
 	private GameState currentState;
@@ -18,14 +31,31 @@ public class GameManager {
 		this.currentState = GameState.WAITING_FOR_PLAYERS;
 		onStateChanged();
 	}
-	
-	public GameState getState(){
+
+	public GameState getState() {
 		return currentState;
 	}
 
 	public void onStateChanged() {
-		if (currentState == GameState.WAITING_FOR_PLAYERS) {
-			
-		}
+
 	}
+
+	public void beginGame() {
+		for (Player p : plugin.getServer().getOnlinePlayers()) {
+			Location loc = p.getLocation();
+	        org.bukkit.World w = loc.getWorld();
+	       
+	        Object cBworld = ((CraftWorld)loc.getWorld()).getHandle();
+	        EntityDragon entityDragon = new EntityDragon(this.plugin, p, loc, (net.minecraft.server.v1_7_R1.World)cBworld);
+	        if (!((net.minecraft.server.v1_7_R1.World)cBworld).addEntity(entityDragon, CreatureSpawnEvent.SpawnReason.CUSTOM))
+	        {
+	          p.kickPlayer(ChatColor.RED + "Error whilst spawning dragon!");
+	          continue;
+	        }
+	        
+	        LivingEntity dragon = (LivingEntity)entityDragon.getBukkitEntity();
+	        this.plugin.dragons.put(p.getName(), dragon);
+	        dragon.setPassenger(p);
+	      }
+		}
 }

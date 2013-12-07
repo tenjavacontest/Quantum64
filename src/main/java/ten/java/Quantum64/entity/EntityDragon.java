@@ -29,10 +29,25 @@ public class EntityDragon extends EntityEnderDragon {
 	boolean ignoreSneaking = false;
 	double fl = 0.0D;
 
-	public EntityDragon(Main plugin, Player player, net.minecraft.server.v1_7_R1.World world) {
+	public EntityDragon(Main plugin, Player player, Location loc, net.minecraft.server.v1_7_R1.World world) {
 		super(world);
 		this.plugin = plugin;
 		this.player = player.getName();
+	    setPosition(loc.getX(), loc.getY(), loc.getZ());
+	    this.yaw = (loc.getYaw() + 180.0F);
+	    while (this.yaw > 360.0F)
+	      this.yaw -= 360.0F;
+	    while (this.yaw < 0.0F)
+	      this.yaw += 360.0F;
+	    if ((this.yaw < 45.0F) || (this.yaw > 315.0F))
+	      this.yaw = 0.0F;
+	    else if (this.yaw < 135.0F)
+	      this.yaw = 90.0F;
+	    else if (this.yaw < 225.0F)
+	      this.yaw = 180.0F;
+	    else {
+	      this.yaw = 270.0F;
+	    }
 	}
 
 	//
