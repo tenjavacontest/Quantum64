@@ -10,12 +10,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_4_5.CraftWorld;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemStack;
 
 import ten.java.Quantum64.Main;
 
@@ -38,6 +34,10 @@ public class EntityDragon extends EntityEnderDragon {
 		this.plugin = plugin;
 		this.player = player.getName();
 	}
+
+	//
+	// START CB CODE HERE
+	//
 
 	/**
 	 * This is some CB code needed to make the entity move, it was taken from the CB repo and is stated in the rules that this is allowed
@@ -248,6 +248,18 @@ public class EntityDragon extends EntityEnderDragon {
 			entitycomplexpart.setPositionRotation(this.locX - (double) ((f11 * f17 + f15 * f18) * f2), this.locY + (adouble2[1] - adouble[1]) * 1.0D - (double) ((f18 + f17) * f9) + 1.5D, this.locZ + (double) ((f12 * f17 + f16 * f18) * f2), 0.0F, 0.0F);
 		}
 
+	}
+
+	//
+	// END CB CODE HERE
+	//
+
+	public boolean damageEntity(DamageSource damagesource, float f) {
+		return false;
+	}
+
+	public boolean canSpawn() {
+		return true;
 	}
 
 }
