@@ -9,6 +9,8 @@
 # Eclipse Files #
 *.project
 *.classpath
+*.settings
+settings/
 
 # Maven Targets #
 target/
