@@ -40,7 +40,7 @@ public class EntityDragon extends EntityEnderDragon {
 	}
 
 	/**
-	 * This is some CB code needed to make the entity
+	 * This is some CB code needed to make the entity move, it was taken from the CB repo and is stated in the rules that this is allowed
 	 */
 	public void c() {
 
@@ -184,6 +184,9 @@ public class EntityDragon extends EntityEnderDragon {
 		d();
 	}
 
+	/**
+	 * This is some CB code needed to form the entity, it was taken from the CB repo and is stated in the rules that this is allowed
+	 */
 	private void d() {
 		this.aN = this.yaw;
 		this.bq.width = this.bq.length = 3.0F;
