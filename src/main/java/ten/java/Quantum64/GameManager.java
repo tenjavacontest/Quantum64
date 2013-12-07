@@ -1,16 +1,12 @@
 package ten.java.Quantum64;
 
-import java.util.Iterator;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+
 import ten.java.Quantum64.entity.EntityDragon;
 
 public class GameManager {
@@ -28,7 +24,7 @@ public class GameManager {
 	}
 
 	public void setState(GameState state) {
-		this.currentState = GameState.WAITING_FOR_PLAYERS;
+		this.currentState = state;
 		onStateChanged();
 	}
 

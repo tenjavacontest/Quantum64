@@ -61,7 +61,7 @@ public class EntityDragon extends EntityEnderDragon {
 
 		if (this.passenger == null) {
 			if (!this.onGround) {
-				double myY = this.locY - this.plugin.dragonSpeed;
+				double myY = this.locY - 5;
 				int imyY = (int) myY;
 				if (imyY < 1)
 					this.onGround = true;
@@ -70,7 +70,7 @@ public class EntityDragon extends EntityEnderDragon {
 				else
 					setPosition(this.locX, myY, this.locZ);
 			}
-			d();
+			//d();
 			return;
 		}
 		this.onGround = false;
@@ -196,13 +196,13 @@ public class EntityDragon extends EntityEnderDragon {
 		}
 
 		setPosition(myX, myY, myZ);
-		d();
+		//d();
 	}
 
 	/**
 	 * This is some CB code needed to form the entity, it was taken from the CB repo and is stated in the rules that this is allowed
 	 */
-	private void d() {
+	/*private void d() {
 		this.aN = this.yaw;
 		this.bq.width = this.bq.length = 3.0F;
 		this.bs.width = this.bs.length = 2.0F;
@@ -263,7 +263,7 @@ public class EntityDragon extends EntityEnderDragon {
 			entitycomplexpart.setPositionRotation(this.locX - (double) ((f11 * f17 + f15 * f18) * f2), this.locY + (adouble2[1] - adouble[1]) * 1.0D - (double) ((f18 + f17) * f9) + 1.5D, this.locZ + (double) ((f12 * f17 + f16 * f18) * f2), 0.0F, 0.0F);
 		}
 
-	}
+	}*/
 
 	//
 	// END CB CODE HERE

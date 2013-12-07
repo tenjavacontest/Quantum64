@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ten.java.Quantum64.GameManager.GameState;
 import ten.java.Quantum64.listener.PlayerListener;
 import ten.java.Quantum64.scoreboards.MainScoreboard;
 
@@ -23,6 +24,8 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		Bukkit.getLogger().log(Level.INFO, "[DRAGON WARS] Enabeling plugin - Made by Quantum64 for ten.java code war");
 		gm = new GameManager(this);
+		gm.setState(GameState.WAITING_FOR_PLAYERS);
+		setupEvents();
 		scoreboardTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new MainScoreboard(this), 5, 20);
 	}
 

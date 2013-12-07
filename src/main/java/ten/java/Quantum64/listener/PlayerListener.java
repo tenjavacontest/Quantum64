@@ -19,7 +19,7 @@ public class PlayerListener implements Listener {
 
 	public void playerJoinEvent(PlayerJoinEvent event) {
 		if (plugin.getGameManager().getState() == GameState.IN_GAME || plugin.getGameManager().getState() == GameState.POST_GAME) {
-			event.getPlayer().sendMessage(ChatColor.WHITE + "Dragon Wars has already started.  YOu are free to spectate this round.");
+			event.getPlayer().sendMessage(ChatColor.WHITE + "Dragon Wars has already started.  You are free to spectate this round.");
 		}
 		event.setJoinMessage(ChatColor.YELLOW + event.getPlayer().getDisplayName() + " has joined!" + ChatColor.RED + "(" + ChatColor.YELLOW + (plugin.getServer().getOnlinePlayers().length + 1) + ChatColor.RED + "/" + ChatColor.YELLOW);
 		event.getPlayer().sendMessage(ChatColor.DARK_AQUA + "=======================================================");

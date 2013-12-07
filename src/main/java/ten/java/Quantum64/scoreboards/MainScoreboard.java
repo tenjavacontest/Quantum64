@@ -54,8 +54,10 @@ public class MainScoreboard implements Runnable {
 
 	private void updateScoreboard(Player player, boolean complete) {
 
-		if (plugin.getServer().getOfflinePlayers().length == plugin.getServer().getMaxPlayers()) {
-			plugin.getGameManager().setState(GameManager.GameState.STARTING_COUNTDOWN);
+		if (plugin.getServer().getOnlinePlayers().length == plugin.getServer().getMaxPlayers()) {
+			if (plugin.getGameManager().getState() == GameManager.GameState.WAITING_FOR_PLAYERS) {
+				plugin.getGameManager().setState(GameManager.GameState.STARTING_COUNTDOWN);
+			}
 		}
 		if (plugin.getGameManager().getState() == GameManager.GameState.WAITING_FOR_PLAYERS) {
 			plugin.setGlobalScoreboardTitle("&a&lWaiting For Players...");
@@ -63,8 +65,12 @@ public class MainScoreboard implements Runnable {
 		}
 		if (plugin.getGameManager().getState() == GameState.STARTING_COUNTDOWN) {
 			timeLeft -= 1;
+			if (plugin.getServer().getOnlinePlayers().length < plugin.getServer().getMaxPlayers()) {
+				plugin.getGameManager().setState(GameManager.GameState.WAITING_FOR_PLAYERS);
+			}
 			plugin.setGlobalScoreboardTitle("&a&lStarting in " + timeLeft + "...");
 			if (timeLeft == 0) {
+				plugin.getGameManager().beginGame();
 				plugin.getGameManager().setState(GameState.IN_GAME);
 			}
 		}
@@ -80,26 +86,28 @@ public class MainScoreboard implements Runnable {
 				timeLeft = 10;
 			}
 		}
-		if(plugin.getGameManager().getState() == GameState.POST_GAME){
-			timeLeft-=1;
+		if (plugin.getGameManager().getState() == GameState.POST_GAME) {
+			timeLeft -= 1;
 			plugin.setGlobalScoreboardTitle("&a&lThanks For Playing! " + timeLeft);
 		}
+
 
 		final Objective objective = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
 		objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', plugin.getGlobalScoreboardTitle()));
 		sendScore(objective, "&6Max Players", 12, complete);
-		sendScore(objective, "&e" + getPlugin().getServer().getMaxPlayers(), 11, complete);
+		sendScore(objective, "&e'" + getPlugin().getServer().getMaxPlayers(), 11, complete);
 		sendScore(objective, "&0", 10, complete);
 		sendScore(objective, "&6Players", 9, complete);
-		sendScore(objective, "&e" + getPlugin().getServer().getOnlinePlayers(), 8, complete);
+		sendScore(objective, "&e" + getPlugin().getServer().getOnlinePlayers().length, 8, complete);
 		sendScore(objective, "&f", 7, complete);
-		sendScore(objective, "&6Players Alive", 5, complete);
-		sendScore(objective, "&1" + plugin.getDragons().size(), 6, complete);
-		sendScore(objective, "&c", 5, complete);
-		sendScore(objective, "&6Players Dead", 4, complete);
-		sendScore(objective, "&4" + (plugin.getServer().getOnlinePlayers().length - plugin.getDragons().size()), 3, complete);
-		sendScore(objective, "&7", 2, complete);
-		sendScore(objective, "&f&lPlugin By: &4Q&cu&6a&en&2t&au&bm&36&14", 1, complete);
+		sendScore(objective, "&6Players Alive", 6, complete);
+		sendScore(objective, "&1" + plugin.getDragons().size(), 5, complete);
+		sendScore(objective, "&c", 4, complete);
+		sendScore(objective, "&6Players Dead", 3, complete);
+		sendScore(objective, "&4" + (plugin.getServer().getOnlinePlayers().length - plugin.getDragons().size()), 2, complete);
+		sendScore(objective, "&7", 1, complete);
+		// sendScore(objective, "&f&lPlugin By: &4Q&cu&6a&en&2t&au&bm&36&14", 1,
+		// complete);
 	}
 
 	public static void sendScore(Objective objective, String title, int value, boolean complete) {

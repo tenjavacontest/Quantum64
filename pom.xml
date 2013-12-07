@@ -4,7 +4,7 @@
   <groupId>ten.java.Quantum64</groupId>
   <artifactId>Quantum64</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.17-SNAPSHOT</version>
   <name>Quantum64</name>
   <url>http://maven.apache.org</url>
   <build>
