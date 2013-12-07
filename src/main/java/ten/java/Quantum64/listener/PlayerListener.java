@@ -1,8 +1,11 @@
 package ten.java.Quantum64.listener;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 
 import ten.java.Quantum64.Main;
 
@@ -21,5 +24,21 @@ public class PlayerListener implements Listener {
 		event.getPlayer().sendMessage(ChatColor.WHITE + "Collect powerups where lightning strikes to gain buffs and weapons");
 		event.getPlayer().sendMessage(ChatColor.RED + "The game will start when " + (plugin.getServer().getMaxPlayers() - (plugin.getServer().getOnlinePlayers().length) + 1));
 		event.getPlayer().sendMessage(ChatColor.DARK_AQUA + "=======================================================");
+	}
+	
+	public void playerMoveEvent(PlayerMoveEvent event){
+		Player player = event.getPlayer();
+		if (player.getLocation().getX() > 300)
+			player.teleport(new Location(player.getWorld(), player.getLocation().getX() - 50, player.getLocation().getY(), player.getLocation().getZ()));
+		if (player.getLocation().getX() < -300)
+			player.teleport(new Location(player.getWorld(), player.getLocation().getX() + 50, player.getLocation().getY(), player.getLocation().getZ()));
+		if (player.getLocation().getY() > 300)
+			player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY() - 50, player.getLocation().getZ()));
+		if (player.getLocation().getY() < -300)
+			player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY() + 50, player.getLocation().getZ()));
+		if (player.getLocation().getZ() > 300)
+			player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ() - 50));
+		if (player.getLocation().getZ() < -300)
+			player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ() + 50));
 	}
 }
