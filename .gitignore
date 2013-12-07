@@ -14,3 +14,4 @@ settings/
 
 # Maven Targets #
 target/
+bin/
