@@ -16,11 +16,13 @@ public class Main extends JavaPlugin {
 
 	private String globalScoreboardTitle = "&4Initializing game...";
 	private int scoreboardTask;
+	private GameManager gm;
 
 	final HashMap<String, LivingEntity> dragons = new HashMap<String, LivingEntity>();
 
 	public void onEnable() {
 		Bukkit.getLogger().log(Level.INFO, "[DRAGON WARS] Enabeling plugin - Made by Quantum64 for ten.java code war");
+		gm = new GameManager(this);
 		scoreboardTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new MainScoreboard(this), 5, 20);
 	}
 
@@ -42,5 +44,9 @@ public class Main extends JavaPlugin {
 
 	public HashMap<String, LivingEntity> getDragons() {
 		return dragons;
+	}
+	
+	public GameManager getGameManager(){
+		return gm;
 	}
 }

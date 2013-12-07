@@ -18,10 +18,14 @@ public class GameManager {
 		this.currentState = GameState.WAITING_FOR_PLAYERS;
 		onStateChanged();
 	}
+	
+	public GameState getState(){
+		return currentState;
+	}
 
 	public void onStateChanged() {
 		if (currentState == GameState.WAITING_FOR_PLAYERS) {
-
+			
 		}
 	}
 }
